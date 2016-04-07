@@ -1,9 +1,9 @@
 package gamenet
 
 import (
-	"log"
-	"github.com/gorilla/websocket"
 	"encoding/binary"
+	"github.com/gorilla/websocket"
+	"log"
 	"time"
 )
 
@@ -21,17 +21,16 @@ const (
 	maxMessageSize = 512
 )
 
-
 type connection struct {
-	ws *websocket.Conn
+	ws   *websocket.Conn
 	send chan []byte
 }
 
-func (c *connection) pushMsg(msg []byte){
-	c.send <- msg;
+func (c *connection) pushMsg(msg []byte) {
+	c.send <- msg
 }
 
-func (c *connection) read(){
+func (c *connection) read() {
 	defer func() {
 		h.unregister <- c
 		c.ws.Close()
@@ -43,7 +42,7 @@ func (c *connection) read(){
 		if len(message) > 4 {
 			id := binary.BigEndian.Uint32(message[:4])
 			payload := message[4:]
-			dispatch( int(id), payload, c);
+			dispatch(int(id), payload, c)
 		}
 
 		if err != nil {
@@ -54,7 +53,7 @@ func (c *connection) read(){
 	}
 }
 
-func (c *connection) write(){
+func (c *connection) write() {
 	ticker := time.NewTicker(pongWait)
 	defer func() {
 		c.ws.Close()
