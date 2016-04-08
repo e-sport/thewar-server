@@ -1,4 +1,6 @@
 #/bin/bash
+CURR=$(pwd)
+GOPATH=$GOPATH:$CURR
+gofmt -w ./src/game
 
-gofmt -w ./src
-go build -o ./bin/server ./src
+go build -o ./bin/server ./src/game

@@ -1,0 +1,16 @@
+package gameproto;
+
+message Login
+{
+    required int32 msgid = 1 [default = 1001];
+    required int32 name = 2;
+}
+
+
+message Move
+{
+    required int32    msgid = 1 [default = 1002];  // ID
+    required int32    x = 2;  // str 
+    required int32    y = 3;  // str
+}
+
