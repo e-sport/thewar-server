@@ -4,6 +4,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"
 	"log"
+	"strconv"
 	"time"
 )
 
@@ -21,7 +22,7 @@ var engine *xorm.Engine
 var max int
 
 type Users struct {
-	Uid      int    `xorm:"notnull pk UUID"`
+	Uid      int    `xorm:"notnull pk UUID INT"`
 	UserName string `xorm:"notnull unique VARCHAR(30)"`
 	Password string `xorm:"notnull VARCHAR(44)"`
 
@@ -36,6 +37,13 @@ func init() {
 
 	one := GetUser(1)
 	log.Print(one.UserName)
+
+	// wtf???
+	result, _ := engine.Query("select max(uid) from users")
+	v, ok := result[0]["max(uid)"]
+	if ok {
+		log.Println(strconv.Atoi(string(v)))
+	}
 
 	/*
 		engine.Sync2(new(Users))
