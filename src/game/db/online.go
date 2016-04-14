@@ -45,6 +45,10 @@ func init() {
 		log.Println(strconv.Atoi(string(v)))
 	}
 
+	var testv int
+	engine.Table("users").Select("max(uid)").Get(&testv)
+	log.Println(testv)
+
 	/*
 		engine.Sync2(new(Users))
 		engine.Insert(&Users{Uid: 1, UserName: "player1", Password: "1"})
