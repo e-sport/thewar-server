@@ -8,14 +8,6 @@ import (
 	"time"
 )
 
-/*
-type User struct {
-	uid      int
-	name     string
-	password string
-}
-*/
-
 var _online = map[int]*Users{}
 
 var engine *xorm.Engine
@@ -44,10 +36,6 @@ func init() {
 	if ok {
 		log.Println(strconv.Atoi(string(v)))
 	}
-
-	var testv int
-	engine.Table("users").Select("max(uid)").Get(&testv)
-	log.Println(testv)
 
 	/*
 		engine.Sync2(new(Users))
