@@ -25,7 +25,7 @@ type Users struct {
 func init() {
 	engine1, _ := xorm.NewEngine("mysql", "dev:dev@tcp(127.0.0.1:3306)/game1")
 	engine = engine1
-	engine.ShowSQL(true)
+	//engine.ShowSQL(true)
 
 	one := GetUser(1)
 	log.Print(one.UserName)

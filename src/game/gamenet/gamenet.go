@@ -19,6 +19,7 @@ func wsHandler(w http.ResponseWriter, r *http.Request) {
 	c := &connection{send: make(chan []byte, 256), ws: ws}
 	h.register <- c
 
+	ws.WriteMessage(websocket.TextMessage, []byte("server test"))
 	go c.read()
 	go c.write()
 }
